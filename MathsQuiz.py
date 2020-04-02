@@ -4,7 +4,6 @@ import random
 
 count = 0
 rightqs = 0
-points = rightqs * 10
 counts = count + points
 
 def display_menu():
@@ -51,8 +50,8 @@ def menu_option(index, count):
             count = check_solution(user_solution, solution, count)
             return count
         else:
-            problem = str(number_one) + " + " + str(number_two)
-            solution = number_one + number_two
+            problem = str(number_one) + " - " + str(number_two)
+            solution = number_one - number_two
             user_solution = get_user_solution(problem)
             count = check_solution(user_solution, solution, count)
     elif index is 2:
