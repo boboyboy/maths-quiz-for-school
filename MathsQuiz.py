@@ -45,24 +45,24 @@ def display_result(total, correct):
     if total == 0:
         percentage = 0
     print("You answered", total, "questions with", correct, "correct.")
-    print("Your score is ", percentage, "%. Thank you.", sep = "")
+    print("Your score is ", percentage, "%. Thank you.")
 
 
 def main():
     display_menu()
-    option = get_user_input()
+    index = get_user_input()
     total = int(0)
     correct = int(0)
     while option != 5:
         total = total + 1
-        correct = menu_option(option, correct)
+        correct = menu_option(index, count, total, correct)
         option = get_user_input()
 
     print("Exit the quiz.")
     display_result(total, correct)
 
 
-def menu_option(index, count):
+def menu_option(index, count, total, correct):
     number_one = random.randrange(1, 21)
     number_two = random.randrange(1, 21)
     if index is 1:
@@ -93,6 +93,6 @@ def menu_option(index, count):
             count = check_solution(user_solution, solution, count)
             return count
     elif index is 3:
-        display_result()
+        display_result(total, correct)
 
 main()
