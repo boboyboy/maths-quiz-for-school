@@ -13,7 +13,7 @@ def display_menu():
 
 def get_user_input():
     user_input = int(input("Enter your choice: "))
-    while user_input > 5 or user_input <= 0:
+    while user_input > 3 or user_input <= 0:
         print("Invalid menu option.")
         user_input = int(input("Please try again: "))
     else:
@@ -48,24 +48,10 @@ def display_result(total, correct):
     print("Your score is ", percentage, "%. Thank you.")
 
 
-def main():
-    display_menu()
-    index = get_user_input()
-    total = int(0)
-    correct = int(0)
-    while option != 5:
-        total = total + 1
-        correct = menu_option(index, count, total, correct)
-        option = get_user_input()
-
-    print("Exit the quiz.")
-    display_result(total, correct)
-
-
-def menu_option(index, count, total, correct):
+def menu_option(index, count, total, correct, get_user_input):
     number_one = random.randrange(1, 21)
     number_two = random.randrange(1, 21)
-    if index is 1:
+    if get_user_input is 1:
         randnum2 = (1, 2)
         if (random.choice(randnum2)) == 1:
             problem = str(number_one) + " + " + str(number_two)
@@ -78,7 +64,7 @@ def menu_option(index, count, total, correct):
             solution = number_one - number_two
             user_solution = get_user_solution(problem)
             count = check_solution(user_solution, solution, count)
-    elif index is 2:
+    elif get_user_input is 2:
         randnum = (1, 2)
         if (random.choice(randnum)) == 1:
             problem = str(number_one) + " * " + str(number_two)
@@ -92,7 +78,24 @@ def menu_option(index, count, total, correct):
             user_solution = get_user_solution(problem)
             count = check_solution(user_solution, solution, count)
             return count
-    elif index is 3:
+    elif get_user_input is 3:
         display_result(total, correct)
+
+def main():
+    display_menu()
+    index = get_user_input()
+    option = get_user_input()
+    total = int(0)
+    correct = int(0)
+    count = int(0)
+    while option != 5:
+        total = total + 1
+        correct = menu_option(index, count, total, correct, user_input)
+        option = get_user_input()
+
+    print("Exit the quiz.")
+    display_result(total, correct)
+
+
 
 main()
