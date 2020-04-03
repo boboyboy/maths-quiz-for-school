@@ -4,6 +4,15 @@ import random
 
 rightqs = 0
 
+
+def is_int(val):
+    try:
+        num = int(val)
+    except ValueError:
+        return False
+    return True
+
+
 def display_menu():
     menu_list = ["1. Easy", "2. Hard", "Results"]
     print(menu_list[0])
@@ -12,13 +21,17 @@ def display_menu():
 
 
 def get_user_input():
-    user_input = int(input("Enter your choice: "))
-    while user_input > 3 or user_input <= 0:
-        print("Invalid menu option.")
-        user_input = int(input("Please try again: "))
+    bad_input = input("Enter your choice: ")
+    if is_int(bad_input) == True:
+        user_input = int(bad_input)
+        while user_input > 3 or user_input <= 0:
+            print("Invalid menu option.")
+            get_user_input()
+        else:
+            return user_input
     else:
-        return user_input
-
+        print('invalid input')
+        get_user_input()
 
 def get_user_solution(problem):
     print("Enter your answer")
@@ -84,17 +97,17 @@ def menu_option(index, count, total, correct, get_user_input):
 def main():
     display_menu()
     index = get_user_input()
-    option = get_user_input()
+'''option = get_user_input()
     total = int(0)
     correct = int(0)
     count = int(0)
     while option != 5:
         total = total + 1
-        correct = menu_option(index, count, total, correct, user_input)
+        correct = menu_option(index, count, total, correct, get_user_input)
         option = get_user_input()
 
     print("Exit the quiz.")
-    display_result(total, correct)
+    display_result(total, correct)'''
 
 
 
