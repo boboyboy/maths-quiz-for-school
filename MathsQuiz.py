@@ -22,9 +22,9 @@ def get_user_input():
     #this function takes the input, determines if it is an int or str and returns it if it is a usable int
     bad_input = input("Enter your choice: ") 
     is_int(bad_input) == False
-    if is_int(bad_input) != False:
+    if is_int(bad_input) == True:
         user_input = int(bad_input)
-        while user_input > 3 or user_input <= 0:
+        if user_input > 3 or user_input <= 0:
             print("Invalid menu option.")
             get_user_input()
         else:
@@ -38,7 +38,15 @@ def get_user_solution(problem):
     print("Enter your answer")
     print(problem, end="")
     result = int(input(str(" = ")))
-    return result
+    is_int(result) == False
+    if is_int(result) != False:
+        user_input2 = int(result)
+        return result
+    
+    else: 
+        print('indalid option')
+        get_user_solution(problem)
+
 
 
 def check_solution(user_solution, actual_solution, count):
@@ -110,13 +118,14 @@ def main():#this is what actually appears in the terminal when the program is ru
     while gameisrunning == True:
         display_menu()
         menu_option = get_user_input()
-        totalqs = totalqs + 1
-        amntcorrect = questions(count, totalqs, amntcorrect)
+     #   totalqs = totalqs + 1
+     #   amntcorrect = questions(count, totalqs, amntcorrect)
 
-        if menu_option == 3:
-            gameisrunning == False
-            print("Exit the quiz.")              #prints the results and how many points you have gotten right
-            display_result(totalqs, amntcorrect)
+      #  if menu_option == 3:
+      #      gameisrunning == False
+       #     print("Exit the quiz.")              #prints the results and how many points you have gotten right
+      #      display_result(totalqs, amntcorrect)
+
 
 
 
