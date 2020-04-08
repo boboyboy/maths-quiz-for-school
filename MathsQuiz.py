@@ -21,7 +21,6 @@ def display_menu():    #the function for the main menu
 def get_user_input(): 
     #this function takes the input, determines if it is an int or str and returns it if it is a usable int
     bad_input = input("Enter your choice: ") 
-    is_int(bad_input) == False
     if is_int(bad_input) == True:
         user_input = int(bad_input)
         if user_input > 3 or user_input <= 0:
@@ -117,10 +116,9 @@ def main():#this is what actually appears in the terminal when the program is ru
     count = 0 
     while gameisrunning == True:
         display_menu()
-        menu_option = get_user_input()
         totalqs = totalqs + 1
-        print(totalqs)
-     #   amntcorrect = questions(count, totalqs, amntcorrect)
+        amntcorrect = questions(count, totalqs, amntcorrect) 
+        print(amntcorrect)
 
       #  if menu_option == 3:
       #      gameisrunning == False
