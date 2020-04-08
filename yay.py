@@ -98,6 +98,7 @@ def main():
         total = total + 1
         correct = menu_option(option, correct)
         option = get_user_input()
+        print (total)
 
     print("Exit the quiz.")
     display_separator()
