@@ -118,7 +118,8 @@ def main():#this is what actually appears in the terminal when the program is ru
     while gameisrunning == True:
         display_menu()
         menu_option = get_user_input()
-     #   totalqs = totalqs + 1
+        totalqs = totalqs + 1
+        print(totalqs)
      #   amntcorrect = questions(count, totalqs, amntcorrect)
 
       #  if menu_option == 3:
