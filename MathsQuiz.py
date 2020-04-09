@@ -2,7 +2,7 @@ import time
 import random
 
 gameisrunning = True
-
+amntcorrect = 0
 
 def is_int(val): #invalidates str inputs
     try:
@@ -36,14 +36,13 @@ def get_user_input():
 def get_user_solution(problem):
     print("Enter your answer")
     print(problem, end="")
-    result = int(input(str(" = ")))
-    is_int(result) == False
-    if is_int(result) != False:
-        user_input2 = int(result)
+    result = input(" = ")
+    if is_int(result) == True:
+        result2 = int(result)
         return result
     
     else: 
-        print('indalid option')
+        print('invalid option')
         get_user_solution(problem)
 
 
@@ -59,19 +58,18 @@ def check_solution(user_solution, actual_solution, count):
 
 
 
-def display_result(totalqs, amntcorrect):            #the fucntion for getting the points and amount correct
-    amntcorrect = 0
+def display_result(totalqs, count):            #the fucntion for getting the points and amount correct
     if totalqs > 0:
-        result = int(amntcorrect) * 10
+        result = int(count) * 10
         points = result
-    if totalqs == 0:
+    elif totalqs == 0:
         points = 0
-    print("You answered", totalqs, "questions with", amntcorrect, "correct.")
+    print("You answered", totalqs, "questions with", count, "correct.")
     print("Your score is ", points, "%. Thank you.")
     return points
 
 
-def questions(count, totalqs, amntcorrect):
+def questions(count, totalqs):
     number_one = random.randrange(1, 21)
     number_two = random.randrange(1, 21)
 
@@ -112,18 +110,19 @@ def questions(count, totalqs, amntcorrect):
 
 def main():#this is what actually appears in the terminal when the program is run
     totalqs = 0
-    amntcorrect = 0
     count = 0 
-    while gameisrunning == True:
+    while gameisrunning == True and get_user_input != 3:
         display_menu()
         totalqs = totalqs + 1
-        amntcorrect = questions(count, totalqs, amntcorrect) 
-        print(amntcorrect)
+        count = questions(count, totalqs)
+        print(totalqs)
+        print(count)
 
-      #  if menu_option == 3:
-      #      gameisrunning == False
-       #     print("Exit the quiz.")              #prints the results and how many points you have gotten right
-      #      display_result(totalqs, amntcorrect)
+    else:
+        get_user_input == 3
+        gameisrunning == False
+        print("Exit the quiz.")              #prints the results and how many points you have gotten right
+        display_result(totalqs, amntcorrect)
 
 
 
