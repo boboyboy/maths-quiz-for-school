@@ -38,7 +38,6 @@ def get_user_solution(problem):
     print(problem, end="")
     result = input(" = ")
     if is_int(result) == True:
-        result2 = int(result)
         return result
     
     else: 
@@ -48,7 +47,7 @@ def get_user_solution(problem):
 
 
 def check_solution(user_solution, actual_solution, count):
-    if user_solution == actual_solution:
+    if get_user_solution(problem) == actual_solution:
         count = count + 1
         print("Correct.")
         return count
@@ -115,6 +114,7 @@ def main():#this is what actually appears in the terminal when the program is ru
         display_menu()
         totalqs = totalqs + 1
         count = questions(count, totalqs)
+
         print(totalqs)
         print(count)
 
