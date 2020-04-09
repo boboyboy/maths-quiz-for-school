@@ -41,18 +41,18 @@ def get_user_solution(problem):
         return result
     
     else: 
-        print('invalid option')
+        print('invalid answer')
         get_user_solution(problem)
 
 
 
 def check_solution(user_solution, actual_solution, count):
-    if get_user_solution(problem) == actual_solution:
+    if user_solution != actual_solution:
+        print("Incorrect.")
+        return count
+    else: 
         count = count + 1
         print("Correct.")
-        return count
-    else:
-        print("Incorrect.")
         return count
 
 
@@ -79,52 +79,47 @@ def questions(count, totalqs):
         randnum2 = (1, 2)#randomises the chances of getting addition and subtraction problems
         if random.choice(randnum2) == 1:
             problem = str(number_one) + " + " + str(number_two)#gives us the addition  problems
-            solution = number_one + number_two
+            actual_solution = number_one + number_two
             user_solution = get_user_solution(problem)
-            count = check_solution(user_solution, solution, count)
+            count = check_solution(user_solution, actual_solution, count)
             return count
         else:
             problem = str(number_one) + " - " + str(number_two)
-            solution = number_one - number_two
+            actual_solution = number_one - number_two
             user_solution = get_user_solution(problem)
-            count = check_solution(user_solution, solution, count)
+            count = check_solution(user_solution, actual_solution, count)
             return count        
+    elif user_input == 2: #the selection criteria for hard questions
+        randnum = (1, 2) #randomises the chances of getting division and multiplication problems
+        if (random.choice(randnum)) == 1:
+            problem = str(number_one) + " * " + str(number_two)
+            actual_solution = number_one * number_two
+            user_solution = get_user_solution(problem)
+            count = check_solution(user_solution, actual_solution, count)
+            return count
+        else:
+            problem = str(number_one) + " // " + str(number_two)
+            actual_solution = number_one * number_two // number_two
+            user_solution = get_user_solution(problem)
+            count = check_solution(user_solution, actual_solution, count)
+            return count
     else:
-        if user_input == 2: #the selection criteria for hard questions
-            randnum = (1, 2) #randomises the chances of getting division and multiplication problems
-            if (random.choice(randnum)) == 1:
-                problem = str(number_one) + " * " + str(number_two)
-                solution = number_one * number_two
-                user_solution = get_user_solution(problem)
-                count = check_solution(user_solution, solution, count)
-                return count
-            else:
-                problem = str(number_one) + " // " + str(number_two)
-                solution = number_one * number_two // number_two
-                user_solution = get_user_solution(problem)
-                count = check_solution(user_solution, solution, count)
-                return count
-
+        print("Exit the quiz.")              #prints the results and how many points you have gotten right
+        display_result(totalqs, amntcorrect)
+        gameisrunning == False
 
 
 def main():#this is what actually appears in the terminal when the program is run
     totalqs = 0
     count = 0 
-    while gameisrunning == True and get_user_input != 3:
+    while gameisrunning == True:
         display_menu()
         totalqs = totalqs + 1
-        count = questions(count, totalqs)
-
+        questions(count, totalqs)
         print(totalqs)
         print(count)
 
-    else:
-        get_user_input == 3
-        gameisrunning == False
-        print("Exit the quiz.")              #prints the results and how many points you have gotten right
-        display_result(totalqs, amntcorrect)
-
-
+    
 
 
 main()
