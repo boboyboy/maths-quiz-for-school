@@ -35,19 +35,23 @@ def get_user_input():
 
 def get_user_solution(problem):
     print("Enter your answer")
-    print(problem, end="")
+    print(problem)
     result = input(" = ")
     if is_int(result) == True:
+        print(type(result))
         return result
     
     else: 
         print('invalid answer')
-        get_user_solution(problem)
+        #get_user_solution(problem)
+        return 0
 
 
 
 def check_solution(user_solution, actual_solution, count):
-    if user_solution != actual_solution:
+    print(user_solution, actual_solution, type(user_solution), type(actual_solution), user_solution != actual_solution)
+
+    if int(user_solution) != actual_solution:
         print("Incorrect.")
         return count
     else: 
@@ -71,6 +75,7 @@ def display_result(totalqs, count):            #the fucntion for getting the poi
 def questions(count, totalqs):
     number_one = random.randrange(1, 21)
     number_two = random.randrange(1, 21)
+
 
    # print(result, points, total)
     user_input = get_user_input()
@@ -99,18 +104,19 @@ def questions(count, totalqs):
             return count
         else:
             problem = str(number_one) + " // " + str(number_two)
-            actual_solution = number_one * number_two // number_two
+            actual_solution = number_one // number_two
             user_solution = get_user_solution(problem)
             count = check_solution(user_solution, actual_solution, count)
             return count
     else:
-        print("Exit the quiz.")              #prints the results and how many points you have gotten right
-        display_result(totalqs, amntcorrect)
-        gameisrunning == False
+        #print("Exit the quiz.")              #prints the results and how many points you have gotten right
+        #display_result(totalqs, amntcorrect)
+        gameisrunning = False
 
 
 def main():#this is what actually appears in the terminal when the program is run
     totalqs = 0
+    print(globals())
     count = 0 
     while gameisrunning == True:
         display_menu()
@@ -119,7 +125,8 @@ def main():#this is what actually appears in the terminal when the program is ru
         print(totalqs)
         print(count)
 
-    
+    print("Exit the quiz.")              #prints the results and how many points you have gotten right
+    display_result(totalqs, amntcorrect)
 
 
 main()
