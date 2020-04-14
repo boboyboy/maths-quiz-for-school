@@ -4,6 +4,10 @@ import random
 gameisrunning = True
 amntcorrect = 0
 
+def changea(tof):
+    global gameisrunning
+    gameisrunning = tof
+
 def is_int(val): #invalidates str inputs
     try:
         num = int(val)
@@ -108,15 +112,14 @@ def questions(count, totalqs):
             user_solution = get_user_solution(problem)
             count = check_solution(user_solution, actual_solution, count)
             return count
-    else:
+    elif user_input == 3:
         #print("Exit the quiz.")              #prints the results and how many points you have gotten right
         #display_result(totalqs, amntcorrect)
-        gameisrunning = False
+        changea(False)
 
 
 def main():#this is what actually appears in the terminal when the program is run
     totalqs = 0
-    print(globals())
     count = 0 
     while gameisrunning == True:
         display_menu()
@@ -125,8 +128,9 @@ def main():#this is what actually appears in the terminal when the program is ru
         print(totalqs)
         print(count)
 
-    print("Exit the quiz.")              #prints the results and how many points you have gotten right
-    display_result(totalqs, amntcorrect)
+    if gameisrunning == False:
+        print("Exit the quiz.")              #prints the results and how many points you have gotten right
+        display_result(totalqs, amntcorrect)
 
 
 main()
