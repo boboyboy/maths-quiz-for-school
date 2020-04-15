@@ -3,7 +3,7 @@ import random
 
 gameisrunning = True
 amntcorrect = 0
-
+count = 0
 def changea(tof):
     global gameisrunning
     gameisrunning = tof
@@ -55,24 +55,26 @@ def get_user_solution(problem):
 def check_solution(user_solution, actual_solution, count):
     print(user_solution, actual_solution, type(user_solution), type(actual_solution), user_solution != actual_solution)
 
-    if int(user_solution) != actual_solution:
-        print("Incorrect.")
-        return count
-    else: 
+    if int(user_solution) == actual_solution:
         count = count + 1
         print("Correct.")
         return count
+    else: 
+        print("Incorrect.")
+        return count
 
 
 
-def display_result(totalqs, count):            #the fucntion for getting the points and amount correct
+def display_result(totalqs, count, user_solution, actual_solution):            #the fucntion for getting the points and amount correct
     if totalqs > 0:
-        result = int(count) * 10
-        points = result
+        points = int(count) * 10
+
     elif totalqs == 0:
         points = 0
+    if int(user_solution) != actual_solution:
+        points = int(points) - 5
     print("You answered", totalqs, "questions with", count, "correct.")
-    print("Your score is ", points, "%. Thank you.")
+    print("Your score is ", points, " points. Thank you.", sep = "")
     return points
 
 
@@ -121,16 +123,19 @@ def questions(count, totalqs):
 def main():#this is what actually appears in the terminal when the program is run
     totalqs = 0
     count = 0 
+    user_solution = 0
+    actual_solution = 0
     while gameisrunning == True:
         display_menu()
         totalqs = totalqs + 1
-        questions(count, totalqs)
+        count = questions(count, count)
         print(totalqs)
         print(count)
+        print(display_result(totalqs, count, user_solution, actual_solution))
 
     if gameisrunning == False:
         print("Exit the quiz.")              #prints the results and how many points you have gotten right
-        display_result(totalqs, amntcorrect)
+        display_result(totalqs, amntcorrect, user_solution, actual_solution)
 
 
 main()
