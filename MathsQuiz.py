@@ -161,14 +161,3 @@ def main():#this is what actually appears in the terminal when the program is ru
 
 
 main()
-#while loop
-    #makes the menu show up, 1 being easy questions, 2 hard and 3 results
-    #gives you questions when you enter the number of an option for questions,
-    #and tells you if the questions right or wrong. 
-    #it then adds that to your score,
-    #or takes that from your score,
-    #with each right answer being +10 point and 
-    #each wrong answer being -5 points.
-#and results breaks out the while loop and returns your results on screen
-
-#count -> correctly_anmswered_questions
