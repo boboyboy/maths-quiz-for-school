@@ -90,12 +90,17 @@ def questions(totalqs):
     global gameisrunning
     global points
     global count
+   # global totalqs
     number_one = random.randrange(1, 21)
     number_two = random.randrange(1, 21)
+    if totalqs == 10:
+        gameisrunning = False
+        print("Exiting the quiz. You got ", count," right, out of ", totalqs,". This gave you a total of ", points," points.")
+        return count 
 
    # print(result, points, total)
     user_input = get_user_input()
-    
+
     if user_input == 1:#the selection criteria for easy questions
         randnum2 = (1, 2)#randomises the chances of getting addition and subtraction problems
         if random.choice(randnum2) == 1:
@@ -125,19 +130,28 @@ def questions(totalqs):
             count = check_solution(user_solution, actual_solution, count)
             return count
 
-            
     elif user_input == 3: #prints the results and how many points you have gotten right
         gameisrunning = False
-        totalqs = totalqs - 1
+
         print("Exiting the quiz. You got ", count," right, out of ", totalqs,". This gave you a total of ", points," points.")
         return count
 
+
+    elif totalqs == 3:
+        gameisrunning = False
+
+        print("Exiting the quiz. You got ", count," right, out of ", totalqs,". This gave you a total of ", points," points.")
+        return count
+
+
 def main():#this is what actually appears in the terminal when the program is run
-    totalqs = 0
-    count = 0 
+    global totalqs
+    global count
+    
     while gameisrunning == True:
         display_menu()
         totalqs = totalqs + 1
+        print("Question ",totalqs)
         count = questions(totalqs)
         point_system(totalqs, count)
 
