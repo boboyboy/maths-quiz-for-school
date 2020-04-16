@@ -4,6 +4,10 @@ import random
 gameisrunning = True
 amntcorrect = 0
 count = 0
+user_solution = 0
+actual_solution = 0
+points = 0
+
 def changea(tof):
     global gameisrunning
     gameisrunning = tof
@@ -15,8 +19,10 @@ def is_int(val): #invalidates str inputs
         return False
     return True
 
-def display_menu():    #the function for the main menu
-    menu_list = ["1. Easy", "2. Hard", "Results"]
+def display_menu():
+    #the function to displays the main menu
+    # returns nothing
+    menu_list = ["1. Easy", "2. Hard", "Results and Exit"]
     print(menu_list[0])
     print(menu_list[1])
     print(menu_list[2])
@@ -53,8 +59,6 @@ def get_user_solution(problem):
 
 
 def check_solution(user_solution, actual_solution, count):
-    print(user_solution, actual_solution, type(user_solution), type(actual_solution), user_solution != actual_solution)
-
     if int(user_solution) == actual_solution:
         count = count + 1
         print("Correct.")
@@ -65,23 +69,33 @@ def check_solution(user_solution, actual_solution, count):
 
 
 
-def display_result(totalqs, count, user_solution, actual_solution):            #the fucntion for getting the points and amount correct
-    if totalqs > 0:
-        points = int(count) * 10
-
-    elif totalqs == 0:
-        points = 0
-    if int(user_solution) != actual_solution:
-        points = int(points) - 5
+def display_result(totalqs, count):          #the function for getting the points and amount correct
+    global points
+    global user_solution
+    global actual_solution
+    print(actual_solution)
+    print(user_solution)
+    if int(user_solution) == int(actual_solution):
+        print(points)
+        points = (points) + 10
+        print('poo', points)
+        return points
+    else:
+        print(points)
+        points = (points) - 5
+        print('pee', points)
+        return points
+ 
     print("You answered", totalqs, "questions with", count, "correct.")
     print("Your score is ", points, " points. Thank you.", sep = "")
     return points
 
-
 def questions(count, totalqs):
+    global user_solution
+    global actual_solution
+    global gameisrunning
     number_one = random.randrange(1, 21)
     number_two = random.randrange(1, 21)
-
 
    # print(result, points, total)
     user_input = get_user_input()
@@ -117,25 +131,36 @@ def questions(count, totalqs):
     elif user_input == 3:
         #print("Exit the quiz.")              #prints the results and how many points you have gotten right
         #display_result(totalqs, amntcorrect)
-        changea(False)
 
+        gameisrunning = False
+        display_result(totalqs, amntcorrect)
+        return count
 
 def main():#this is what actually appears in the terminal when the program is run
     totalqs = 0
     count = 0 
-    user_solution = 0
-    actual_solution = 0
     while gameisrunning == True:
         display_menu()
         totalqs = totalqs + 1
-        count = questions(count, count)
+        count = questions(count, totalqs)
         print(totalqs)
         print(count)
-        print(display_result(totalqs, count, user_solution, actual_solution))
+        print(display_result(totalqs, count))
 
-    if gameisrunning == False:
-        print("Exit the quiz.")              #prints the results and how many points you have gotten right
-        display_result(totalqs, amntcorrect, user_solution, actual_solution)
+ #   if gameisrunning == False:
+  #      print("Exit the quiz.")              #prints the results and how many points you have gotten right
+   #        display_result(totalqs, amntcorrect)
 
 
 main()
+#while loop
+    #makes the menu show up, 1 being easy questions, 2 hard and 3 results
+    #gives you questions when you enter the number of an option for questions,
+    #and tells you if the questions right or wrong. 
+    #it then adds that to your score,
+    #or takes that from your score,
+    #with each right answer being +10 point and 
+    #each wrong answer being -5 points.
+#and results breaks out the while loop and returns your results on screen
+
+#count -> correctly_anmswered_questions
