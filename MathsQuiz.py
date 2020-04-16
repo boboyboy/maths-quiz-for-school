@@ -7,6 +7,7 @@ count = 0
 user_solution = 0
 actual_solution = 0
 points = 0
+totalqs = 0
 
 def changea(tof):
     global gameisrunning
@@ -48,7 +49,6 @@ def get_user_solution(problem):
     print(problem)
     result = input(" = ")
     if is_int(result) == True:
-        print(type(result))
         return result
     
     else: 
@@ -69,31 +69,27 @@ def check_solution(user_solution, actual_solution, count):
 
 
 
-def display_result(totalqs, count):          #the function for getting the points and amount correct
+def point_system(totalqs, count):          #the function for getting the points and amount correct
     global points
     global user_solution
     global actual_solution
-    print(actual_solution)
-    print(user_solution)
     if int(user_solution) == int(actual_solution):
-        print(points)
         points = (points) + 10
-        print('poo', points)
         return points
     else:
-        print(points)
         points = (points) - 5
-        print('pee', points)
         return points
  
-    print("You answered", totalqs, "questions with", count, "correct.")
-    print("Your score is ", points, " points. Thank you.", sep = "")
     return points
 
-def questions(count, totalqs):
+
+
+def questions(totalqs):
     global user_solution
     global actual_solution
     global gameisrunning
+    global points
+    global count
     number_one = random.randrange(1, 21)
     number_two = random.randrange(1, 21)
 
@@ -128,12 +124,12 @@ def questions(count, totalqs):
             user_solution = get_user_solution(problem)
             count = check_solution(user_solution, actual_solution, count)
             return count
-    elif user_input == 3:
-        #print("Exit the quiz.")              #prints the results and how many points you have gotten right
-        #display_result(totalqs, amntcorrect)
 
+            
+    elif user_input == 3: #prints the results and how many points you have gotten right
         gameisrunning = False
-        display_result(totalqs, amntcorrect)
+        totalqs = totalqs - 1
+        print("Exiting the quiz. You got ", count," right, out of ", totalqs,". This gave you a total of ", points," points.")
         return count
 
 def main():#this is what actually appears in the terminal when the program is run
@@ -142,10 +138,8 @@ def main():#this is what actually appears in the terminal when the program is ru
     while gameisrunning == True:
         display_menu()
         totalqs = totalqs + 1
-        count = questions(count, totalqs)
-        print(totalqs)
-        print(count)
-        print(display_result(totalqs, count))
+        count = questions(totalqs)
+        point_system(totalqs, count)
 
  #   if gameisrunning == False:
   #      print("Exit the quiz.")              #prints the results and how many points you have gotten right
