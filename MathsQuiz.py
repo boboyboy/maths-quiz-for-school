@@ -1,6 +1,8 @@
 import time
 import random
 
+
+#the global variables that will be used throughout the program
 gameisrunning = True
 amntcorrect = 0
 count = 0
@@ -45,6 +47,7 @@ def get_user_input():
 
 
 def get_user_solution(problem):
+    #the function for getting the users answer to the maths problem
     print("Enter your answer")
     print(problem)
     result = input(" = ")
@@ -53,12 +56,12 @@ def get_user_solution(problem):
     
     else: 
         print('invalid answer')
-        #get_user_solution(problem)
         return 0
 
 
 
 def check_solution(user_solution, actual_solution, count):
+    #this checks if the users answer to the given question is correct, and tells them if it is correct or incorrect
     if int(user_solution) == actual_solution:
         count = count + 1
         print("Correct.")
@@ -69,7 +72,8 @@ def check_solution(user_solution, actual_solution, count):
 
 
 
-def point_system(totalqs, count):          #the function for getting the points and amount correct
+def point_system(totalqs, count):
+    #the function for getting the points and amount correct
     global points
     global user_solution
     global actual_solution
@@ -85,20 +89,22 @@ def point_system(totalqs, count):          #the function for getting the points 
 
 
 def questions(totalqs):
+    #this function makes the maths questions, depending on what option you select
+    #it also check if the amount of questions = 10, and if it does, the program will quit
     global user_solution
     global actual_solution
     global gameisrunning
     global points
     global count
-   # global totalqs
     number_one = random.randrange(1, 21)
     number_two = random.randrange(1, 21)
     if totalqs == 10:
+        #the if that checks if the total questions is 10, and if it does it quits the program
         gameisrunning = False
         print("Exiting the quiz. You got ", count," right, out of ", totalqs,". This gave you a total of ", points," points.")
         return count 
 
-   # print(result, points, total)
+
     user_input = get_user_input()
 
     if user_input == 1:#the selection criteria for easy questions
@@ -137,27 +143,19 @@ def questions(totalqs):
         return count
 
 
-    elif totalqs == 3:
-        gameisrunning = False
-
-        print("Exiting the quiz. You got ", count," right, out of ", totalqs,". This gave you a total of ", points," points.")
-        return count
-
-
-def main():#this is what actually appears in the terminal when the program is run
+def main():
+    #this is what actually appears in the terminal when the program is run
     global totalqs
     global count
     
     while gameisrunning == True:
+        #the while loop that makes the program run until it is terminated
         display_menu()
         totalqs = totalqs + 1
         print("Question ",totalqs)
         count = questions(totalqs)
         point_system(totalqs, count)
 
- #   if gameisrunning == False:
-  #      print("Exit the quiz.")              #prints the results and how many points you have gotten right
-   #        display_result(totalqs, amntcorrect)
 
 
 main()
